@@ -1,1 +1,25 @@
-.
+class Solution {
+    public int findLHS(int[] nums) {
+        // Create a hashmap to store frequency of each number
+        Map<Integer, Integer> hash = new HashMap<>();
+        // Initialize variable to track the longest harmonious subsequence length
+        int longest = 0;
+        
+        // Count frequencies of all numbers in the array
+        for (int num : nums) {
+            hash.put(num, hash.getOrDefault(num, 0) + 1);
+        }
+        
+        // Check each number to see if it has a adjacent number (+1)
+        for (int key : hash.keySet()) {
+            // If current number +1 exists in map, calculate their combined frequency
+            if (hash.containsKey(key + 1)) {
+                // Update longest if current pair has higher frequency
+                longest = Math.max(longest, hash.get(key) + hash.get(key + 1));
+            }
+        }
+        
+        // Return the length of longest harmonious subsequence found
+        return longest;
+    }
+}
